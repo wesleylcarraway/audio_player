@@ -62,20 +62,16 @@ public class MainActivity extends AppCompatActivity {
 
         File[] files = file.listFiles();
 
-        //if(files != null) {
-            for(File singleFile: files) {
-                if(singleFile.isDirectory() && !singleFile.isHidden()) {
-                    arrayList.addAll(findAudio(singleFile));
-                }
-                else {
-                    if(singleFile.getName().endsWith(".mp3") || singleFile.getName().endsWith(".wav")) {
-                        arrayList.add(singleFile);
-                    }
+        for(File singleFile: files) {
+            if(singleFile.isDirectory() && !singleFile.isHidden()) {
+                arrayList.addAll(findAudio(singleFile));
+            }
+            else {
+                if(singleFile.getName().endsWith(".mp3") || singleFile.getName().endsWith(".wav")) {
+                    arrayList.add(singleFile);
                 }
             }
-        //}
-
-
+        }
         return arrayList;
     }
 
@@ -87,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
             items[i] = myAudios.get(i).getName().toString().replace(".mp3", "").replace(".wav", "");
         }
 
-        /*ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        listView.setAdapter(myAdapter);*/
         CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
 
